@@ -15,7 +15,7 @@
 
 var AUTO_CONFIG = {
     enabled: true,                    // Enable/disable auto-processing
-    checkInterval: 300000,            // Check every 5 minutes (300000 ms)
+    checkInterval: 60000,             // TEST: Check every 1 minute (60000 ms) - change to 300000 for production
     sourceFolder: "C:/temp/montaj_input/",  // TEST: Local folder (change to network path later)
     runOnStartup: true,               // Run immediately on InDesign startup
     showNotifications: true,          // Show processing notifications
