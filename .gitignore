@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# InDesign
+*.indd
+*.indb
+*.idlk
+*.indt
+
+# Logs
+*.log
+processing_log.txt
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Output folders (uncomment if you don't want to track output)
+# done/
+# _ERRORS/
+# multipage/
+# trubles/
+# KonvLam/
+# podbor/
+# Konv/
+# white_lack/
+
+# Config files with sensitive paths (optional)
+# myPath.txt
+# myAlert.txt
