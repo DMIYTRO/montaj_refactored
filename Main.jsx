@@ -54,6 +54,7 @@ if (fileList == 0) {
 else {
     var successCount = 0;
     var errorCount = 0;
+    var bigPrintCount = 0;
 
     for (var a = 0; a < fileList.length; a++) {
         try {
@@ -129,23 +130,26 @@ else {
 
 
                     if (sheetPrintrun != false) {
+                        // Check if printrun exceeds limit
                         if (sheetPrintrun > 500) {
-                            var dlg = new Window('dialog', "Тираж", [1000, 500, 1100, 580]);
-
-
-                            dlg.sborkaName = dlg.add('edittext', [20, 5, 100, 30], sheetPrintrun);
-
-
-                            dlg.btnCreate = dlg.add('button', [20, 40, 100, 70], "Да!");;
-
-                            dlg.btnCreate.onClick = function () {
-
-                                dlg.close();
-
-
+                            // Close any open documents
+                            if (app.documents.length > 0) {
+                                app.documents[0].close(SaveOptions.NO);
                             }
-                            dlg.show();
-                            sheetPrintrun = dlg.sborkaName.text;
+
+                            // Move to big_print folder
+                            var bigPrintFolder = sourceFolder + "/big_print/";
+                            if (!new Folder(bigPrintFolder).exists) {
+                                new Folder(bigPrintFolder).create();
+                            }
+
+                            var destFile = bigPrintFolder + filename;
+                            file.copy(destFile);
+                            file.remove();
+
+                            bigPrintCount++;
+                            Logger.info("Moved to big_print (printrun: " + sheetPrintrun + "): " + filename);
+                            continue; // Skip to next file
                         }
                         checkWhite();
                         clearFace();
@@ -293,10 +297,13 @@ else {
     }
 }
 
-Logger.info("Finished. Success: " + successCount + ", Errors: " + errorCount);
+Logger.info("Finished. Success: " + successCount + ", Errors: " + errorCount + ", Big print: " + bigPrintCount);
 
 if (fileList != 0) {
     myAlert = "Готово!\nОбработано: " + successCount + "\nОшибок: " + errorCount;
+    if (bigPrintCount > 0) {
+        myAlert = myAlert + "\n\nБОЛЬШОЙ ТИРАЖ (>500):\n" + bigPrintCount + " файл(ов) в папке big_print/"
+    }
     if (konv) {
         myAlert = myAlert + "\n\nКорверты:\nБЫЛИ ЗАМЕЧЕНЫ"
     }
