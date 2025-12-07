@@ -118,7 +118,7 @@ function createStatusWindow() {
 
 function processFolder() {
     try {
-        var sourceFolder = CONFIG.sourceFolder; // Set global for included modules
+        sourceFolder = CONFIG.sourceFolder; // GLOBAL variable for included modules
 
         $.writeln("[" + new Date().toLocaleTimeString() + "] Checking folder...");
 
