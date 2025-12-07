@@ -15,6 +15,8 @@
 # Logs
 *.log
 processing_log.txt
+id_logs/
+watcher_status.txt
 
 # Temporary files
 *.tmp

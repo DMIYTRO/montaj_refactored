@@ -16,7 +16,8 @@
 // ===============================================
 
 var CONFIG = {
-    sourceFolder: "//10.20.2.60/work/input/",
+    sourceFolder: "c:/dmitry/PDF/PDF_main/",
+    logFolder: "c:/dmitry/PDF/PDF_main/id_logs/",
     checkInterval: 300000,  // 300 seconds (5 minutes)
     maxFilesPerRun: 50,
     showStatusWindow: true
@@ -38,7 +39,13 @@ var statusWindow = null;
 
 function updateStatusFile() {
     try {
-        var statusFile = new File(CONFIG.sourceFolder + "watcher_status.txt");
+        // Create log folder if it doesn't exist
+        var logFolder = new Folder(CONFIG.logFolder);
+        if (!logFolder.exists) {
+            logFolder.create();
+        }
+
+        var statusFile = new File(CONFIG.logFolder + "watcher_status.txt");
         statusFile.encoding = "UTF-8";
         statusFile.open("w");
 
@@ -122,8 +129,14 @@ function processFolder() {
             return;
         }
 
+        // Create log folder if it doesn't exist
+        var logFolder = new Folder(CONFIG.logFolder);
+        if (!logFolder.exists) {
+            logFolder.create();
+        }
+
         // Initialize Logger
-        Logger.init(sourceFolder);
+        Logger.init(CONFIG.logFolder);
         Logger.info("=== Auto-check started (iteration #" + stats.iteration + ") ===");
 
         var fileList = folder.getFiles();
@@ -393,11 +406,12 @@ function processFolder() {
 $.writeln("=================================================");
 $.writeln("Montaj Auto Watcher (Full Processing)");
 $.writeln("=================================================");
-$.writeln("Folder: " + CONFIG.sourceFolder);
+$.writeln("Source folder: " + CONFIG.sourceFolder);
+$.writeln("Log folder: " + CONFIG.logFolder);
 $.writeln("Interval: " + (CONFIG.checkInterval / 1000) + " seconds");
 $.writeln("");
-$.writeln("Status file: " + CONFIG.sourceFolder + "watcher_status.txt");
-$.writeln("Log file: " + CONFIG.sourceFolder + "montaj.log");
+$.writeln("Status file: " + CONFIG.logFolder + "watcher_status.txt");
+$.writeln("Log file: " + CONFIG.logFolder + "processing_log.txt");
 $.writeln("");
 $.writeln("Press ESC in InDesign or click Stop button");
 $.writeln("=================================================");
