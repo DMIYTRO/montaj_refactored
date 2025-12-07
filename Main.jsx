@@ -323,6 +323,29 @@ if (fileList != 0) {
         myAlert = myAlert + "\n\nБЕЛЫЙ - ЛАК!!!"
     }
 
+    // Log detailed statistics
+    if (bigPrintCount > 0) {
+        Logger.info("Big print files: " + bigPrintCount + " (moved to big_print/)");
+    }
+    if (konv) {
+        Logger.info("Envelopes detected (moved to Konv/)");
+    }
+    if (konvlam) {
+        Logger.info("Envelope lamination detected (moved to KonvLam/)");
+    }
+    if (multi) {
+        Logger.info("Multipage files detected (moved to multipage/)");
+    }
+    if (trubles) {
+        Logger.info("Problem files detected (moved to trubles/)");
+    }
+    if (white_lack) {
+        Logger.info("White + varnish files detected (moved to white_lack/)");
+    }
+    if (checkNotJdf) {
+        Logger.warn("Non-automatic files (no JDF created): " + checkNotJdfCount);
+    }
+
     // saveJDF(); // Removed: JDFs are saved immediately now
 
     var Alertinfo = new File("c:/myAlert.txt");
