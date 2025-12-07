@@ -194,11 +194,17 @@ function processFolder() {
 // ===============================================
 
 function setupIdleTask() {
-    // Remove existing task if any
-    if (autoMontajState.taskId !== null) {
-        try {
-            app.idleTasks.itemByID(autoMontajState.taskId).remove();
-        } catch (e) {}
+    // Remove ALL existing tasks with same name to prevent duplicates
+    try {
+        var existingTasks = app.idleTasks.everyItem().getElements();
+        for (var i = existingTasks.length - 1; i >= 0; i--) {
+            if (existingTasks[i].name === "AutoMontaj_Monitor") {
+                existingTasks[i].remove();
+                $.writeln("[AutoMontaj] Removed existing idle task");
+            }
+        }
+    } catch (e) {
+        $.writeln("[AutoMontaj] Error removing old tasks: " + e.message);
     }
 
     // Create new idle task
@@ -215,6 +221,9 @@ function setupIdleTask() {
     task.addEventListener(IdleEvent.ON_IDLE, function() {
         if (!autoMontajState.isRunning) {
             processFolder();
+
+            // Re-arm the task for next run
+            this.sleep = AUTO_CONFIG.checkInterval;
         }
     });
 
