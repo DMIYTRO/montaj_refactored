@@ -10,7 +10,7 @@
 
 var CONFIG = {
     sourceFolder: "C:/temp/montaj_input/",
-    checkInterval: 60000,  // 60 seconds in milliseconds
+    checkInterval: 300000,  // 300 seconds (5 minutes) - change as needed
     maxFilesPerRun: 50,
     showStatusWindow: true  // Show small status window
 };
