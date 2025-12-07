@@ -16,7 +16,7 @@
 var AUTO_CONFIG = {
     enabled: true,                    // Enable/disable auto-processing
     checkInterval: 300000,            // Check every 5 minutes (300000 ms)
-    sourceFolder: "//10.20.2.60/work/input/",  // Network folder to monitor
+    sourceFolder: "C:/temp/montaj_input/",  // TEST: Local folder (change to network path later)
     runOnStartup: true,               // Run immediately on InDesign startup
     showNotifications: true,          // Show processing notifications
     autoCloseDocuments: true,         // Close documents after processing
@@ -24,10 +24,10 @@ var AUTO_CONFIG = {
 
     // Working hours (set to null to run 24/7)
     workingHours: {
-        enabled: true,
-        start: 8,                     // 8:00 AM
-        end: 20,                      // 8:00 PM
-        daysOfWeek: [1, 2, 3, 4, 5]  // Monday-Friday (0=Sunday, 6=Saturday)
+        enabled: false,               // ОТКЛЮЧЕНО - работает 24/7
+        start: 0,
+        end: 24,
+        daysOfWeek: [0, 1, 2, 3, 4, 5, 6]  // Все дни недели
     }
 };
 
