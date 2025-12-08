@@ -84,7 +84,7 @@ function updateStatusWindow() {
 function createStatusWindow() {
     if (!CONFIG.showStatusWindow) return;
 
-    var win = new Window("palette", "Montaj Watcher", undefined, {closeButton: false});
+    var win = new Window("palette", "Montaj Watcher", undefined, { closeButton: false });
     win.orientation = "column";
     win.alignChildren = ["fill", "top"];
     win.spacing = 5;
@@ -100,7 +100,7 @@ function createStatusWindow() {
     win.statsText.characters = 40;
 
     var stopBtn = win.add("button", undefined, "Stop");
-    stopBtn.onClick = function() {
+    stopBtn.onClick = function () {
         if (confirm("Stop watcher?")) {
             win.close();
             $.writeln("\n[STOPPED BY USER]");
@@ -156,12 +156,12 @@ function processFolder() {
         // Process files (same logic as Main.jsx)
         for (var a = 0; a < fileList.length; a++) {
             try {
-                // Reset per-file flags
-                var p92 = false;
-                var diz = false;
-                var myPaperH;
-                var paperSelect = "";
-                var presetName = false;
+                // Reset per-file flags - ALL GLOBAL for included modules
+                p92 = false;
+                diz = false;
+                myPaperH = undefined;
+                paperSelect = "";
+                presetName = false;
 
                 file = fileList[a]; // Global
                 filename = file.name; // Global
@@ -170,13 +170,13 @@ function processFolder() {
 
                 Logger.info("Processing: " + filename);
 
-                var sra = false;
-                var white = false;
-                var chb = false;
-                var kash = false;
+                sra = false;
+                white = false;
+                chb = false;
+                kash = false;
                 notkub = false;
                 nameL = true;
-                var displacement = 2;
+                displacement = 2;
 
                 if (file instanceof File && file.name.match(/\.(pdf)$/i)) {
                     if (!file.name.match(/podbor/gi) && !file.name.match(/multipage/gi) && !file.name.match(/Hlam/gi) &&
@@ -249,7 +249,7 @@ function processFolder() {
                             }
                             checkWhite();
                             clearFace();
-                            tiraj();
+                            tiraj(sheetPrintrun);
                             if (!file.name.match(/\(KONV\)/gi)) {
                                 addMarks();
                                 checkImposePaper();
@@ -271,7 +271,7 @@ function processFolder() {
                             saveAndClose();
 
                             if (presetName) {
-                                createAndSaveJDF();
+                                createAndSaveJDF(sheetPrintrun);
                             }
                             successCount++;
                         }

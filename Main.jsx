@@ -153,7 +153,7 @@ else {
                         }
                         checkWhite();
                         clearFace();
-                        tiraj();
+                        tiraj(sheetPrintrun);
                         if (!file.name.match(/\(KONV\)/gi)) {
                             addMarks();
                             checkImposePaper();
@@ -181,7 +181,7 @@ else {
                         saveAndClose();
 
                         if (presetName) {
-                            createAndSaveJDF();
+                            createAndSaveJDF(sheetPrintrun);
                         }
                         successCount++;
                     }

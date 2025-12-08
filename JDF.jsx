@@ -1,7 +1,7 @@
 // JDF.jsx
 // JDF creation and output handling
 
-function createAndSaveJDF() {
+function createAndSaveJDF(sheetPrintrun) {
     filePS = exportFolder + filename.substr(0, filename.length - 4) + listEnd + ".pdf";
 
 

@@ -446,7 +446,7 @@ function checkImposePaper() {
     }
 }
 
-function tiraj() {
+function tiraj(sheetPrintrun) {
     result = filename.match(/_T[0-9]*?_/g).toString();
     result = result.substr(2, result.length - 3);
     list = "_L" + sheetPrintrun + "_";
